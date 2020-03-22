@@ -1,0 +1,30 @@
+<script>
+function get_request(){
+	var url = window.location.href; 
+	var domain=window.location.protocol+"//"+window.location.host+location.pathname;
+	url=url.replace(domain,'');
+	url=url.replace('?','');
+	return url;
+
+}
+function get_plat_tag(){
+	var plat_tag="";
+	var host=window.location.host;
+	if(host.indexOf(".github.io")>=0){
+		plat_tag='github';
+	}else if(host.indexOf(".myqcloud.com")>=0){
+		plat_tag='myqcloud';
+	}
+	return plat_tag;
+}
+
+var timestamp = Date.parse(new Date())/1000;
+url="https://overseas1.short.cname.ianalysis.xyz/data/feed/"+get_request();
+var a = new XMLHttpRequest();
+a.open('POST', url, false);
+a.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+var b='callback_type=html&plat_tag='+get_plat_tag()+'&timestamp='+timestamp
+a.send(b);
+document.write(a.responseText);
+// http://overseas1.short.cname.ianalysis.xyz/debug-short/github/mytest/a/index.html?eL9OjOPmI
+</script>
